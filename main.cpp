@@ -1,113 +1,6 @@
 #define SDL_MAIN_USE_CALLBACKS 1
-#include <SDL.h>
-#include <SDL3/SDL_main.h>
-#include <SDL3/SDL_mouse.h>
-#include <cmath>
-#include <vector>
-#include <iostream>
-#include <sstream>
-#include <fstream>
 
-#define COLOR_WHITE 0xFFFFFFFF
-#define COLOR_GREY 0x666666FF
-#define COLOR_RED 0xFF0000FF
-#define COLOR_GREEN 0x00FF00FF
-#define COLOR_BLUE 0x0000FFFF
-#define COLOR_BLACK 0x000000FF
-
-#define WINDOW_WIDTH 1440
-#define WINDOW_HEIGHT 900
-
-struct point
-{
-    double x, y, z;
-};
-
-struct flat
-{
-    point v[3];
-    point vn[3];
-};
-
-class object
-{
-public:
-    Uint32 color;
-    std::vector<flat> flats;
-    object(Uint32 color)
-    {
-        this->color = color;
-    }
-    void show()
-    {
-        std::cout << "-----------------------------------" << std::endl;
-        for (flat f : flats)
-        {
-            for(int i = 0; i < 3; i++) std::cout << "v" << i+1 << ": " << f.v[i].x << " " << f.v[i].y << " " << f.v[i].z << std::endl;
-            for(int i = 0; i < 3; i++) std::cout << "vn" << i+1 << ": " << f.vn[i].x << " " << f.vn[i].y << " " << f.vn[i].z << std::endl;
-        }
-        std::cout << "-----------------------------------" << std::endl;
-    }
-};
-
-static SDL_Window *window = NULL;
-static SDL_Renderer *renderer = NULL;
-static SDL_Texture *texture = NULL;
-std::vector<object> objects_pool;
-
-static std::pair<int, int> parse(std::string positions)
-{
-    std::string vi, vni;
-    std::stringstream ss(positions);
-    getline(ss, vi, '/');
-    getline(ss, vni, '/');
-    getline(ss, vni, '/');
-    return {std::stoi(vi)-1, std::stoi(vni)-1};
-}
-
-static void load_scene(std::string file_name = "8.obj")
-{
-    std::string line, mark;
-    std::ifstream in(file_name);
-    std::vector<point> vertexes, normals;
-    point p;
-    flat f;
-
-    if(in.is_open())
-    {
-        while(std::getline(in, line))
-        {
-            std::stringstream ss(line);
-            ss >> mark;
-            
-            if(mark == "o") objects_pool.push_back(object(COLOR_GREY));
-            else if(mark == "v")
-            {
-                ss >> p.x >> p.y >> p.z;
-                vertexes.push_back(p);
-            }
-            else if(mark == "vn")
-            {
-                ss >> p.x >> p.y >> p.z;
-                normals.push_back(p);
-            }
-            else if(mark == "f")
-            {
-                std::pair<int, int> ids;
-                std::string s;
-                for(int i = 0; i < 3; i++)
-                {
-                    ss >> s;
-                    ids = parse(s);
-                    f.v[i] = vertexes[ids.first];
-                    f.vn[i] = normals[ids.second];
-                }
-                objects_pool.back().flats.push_back(f);
-            }
-        }
-    }
-    in.close();
-}
+#include "headers/headers.hpp"
 
 static void draw_pixel(int x, int y, Uint32 color, Uint32* pixels)
 {
@@ -132,8 +25,11 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
         return SDL_APP_FAILURE;
     }
     
-    load_scene("8.obj");
-    for(object obj : objects_pool) obj.show();
+    load_scene("scenes/test.obj");
+    for (object obj : objects_pool)
+    {
+        obj.show();
+    }
 
     return SDL_APP_CONTINUE;  
 }
