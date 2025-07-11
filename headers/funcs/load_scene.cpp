@@ -10,7 +10,7 @@ pair<int, int> parse(string positions)
     return {stoi(vi)-1, stoi(vni)-1};
 }
 
-static void load_scene(string file_name = "scenes/8.obj")
+void load_scene(string file_name = "scenes/8.obj")
 {
     string line, mark;
     ifstream in(file_name);

@@ -1,6 +1,7 @@
 #define SDL_MAIN_USE_CALLBACKS 1
 
 #include "headers/headers.hpp"
+#include <SDL3/SDL_main.h>
 
 static void draw_pixel(int x, int y, Uint32 color, Uint32* pixels)
 {

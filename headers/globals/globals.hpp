@@ -12,7 +12,7 @@
 #define WINDOW_WIDTH 1440
 #define WINDOW_HEIGHT 900
 
-SDL_Window *window = NULL;
-SDL_Renderer *renderer = NULL;
-SDL_Texture *texture = NULL;
-std::vector<object> objects_pool;
+extern SDL_Window *window;
+extern SDL_Renderer *renderer;
+extern SDL_Texture *texture;
+extern std::vector<object> objects_pool;

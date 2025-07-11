@@ -15,11 +15,25 @@ matrix::matrix(int width, int height)
 matrix::matrix(vector<vector<double>> m)
 {
     matrix_body = m;
+    width = matrix_body[0].size();
+    height = matrix_body.size();
+}
+
+matrix::matrix(vector3d v3d)
+{
+    matrix_body = {{v3d.x},{v3d.y},{v3d.z},{v3d.w}};
+    width = matrix_body[0].size();
+    height = matrix_body.size();
 }
 
 vector<double> matrix::operator [](unsigned int index)
 {
     return matrix_body[index];
+}
+
+vector3d matrix::to_vector3d()
+{
+    return vector3d(matrix_body[0][0], matrix_body[1][0], matrix_body[2][0], matrix_body[3][0]);
 }
 
 matrix matrix::operator*(matrix m)
@@ -36,5 +50,5 @@ matrix matrix::operator*(matrix m)
 
 vector3d matrix::operator*(vector3d v)
 {
-    return vector3d((*this) * v.to_matrix());  
+    return ((*this) * matrix(v)).to_vector3d();  
 }

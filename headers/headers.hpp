@@ -1,7 +1,6 @@
 #pragma once
 
 #include <SDL.h>
-#include <SDL3/SDL_main.h>
 #include <SDL3/SDL_mouse.h>
 #include <vector>
 #include <cmath>

@@ -4,4 +4,4 @@
 
 using namespace std;
 
-static void load_scene(string);
+void load_scene(string);

@@ -4,6 +4,15 @@
 
 using namespace std;
 
+class vector3d
+{
+public:
+    double x, y, z, w;
+    vector3d();
+    vector3d(double, double, double);
+    vector3d(double, double, double, double);
+};
+
 class matrix
 {
 public:
@@ -12,19 +21,11 @@ public:
     matrix();
     matrix(int, int);
     matrix(vector<vector<double>>);
+    matrix(vector3d);
+    vector3d to_vector3d();
     vector<double> operator [](unsigned int);
     matrix operator *(matrix);
     vector3d operator *(vector3d);
-};
-
-class vector3d
-{
-public:
-    double x, y, z, w;
-    vector3d();
-    vector3d(double, double, double, double w = 1);
-    vector3d(matrix);
-    matrix to_matrix();
 };
 
 class vertex
