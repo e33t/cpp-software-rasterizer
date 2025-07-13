@@ -20,3 +20,8 @@ vector3d::vector3d(double x, double y, double z, double w)
     this->z = z;
     this->w = w;
 }
+
+vector3 vector3d::to_vector3()
+{
+    return vector3(x/w, y/w, z/w);
+}

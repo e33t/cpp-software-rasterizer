@@ -4,6 +4,17 @@
 
 using namespace std;
 
+class vector3
+{
+public:
+    double x, y, z;
+    vector3();
+    vector3(double, double, double);
+    vector3 operator+(vector3);
+    vector3 operator-(vector3);
+    vector3 operator*(vector3);
+};
+
 class vector3d
 {
 public:
@@ -11,6 +22,7 @@ public:
     vector3d();
     vector3d(double, double, double);
     vector3d(double, double, double, double);
+    vector3 to_vector3();
 };
 
 class matrix
@@ -48,5 +60,39 @@ public:
     Uint32 color;
     vector<flat> flats;
     object(Uint32);
+    object transform(matrix);
     void show();
+};
+
+class camera
+{
+    vector3 up_dir = vector3(0, 1, 0);
+    vector3 position;
+    vector3 target;
+    vector3 direction;
+    vector3 right;
+    vector3 up;
+public:
+    double angle;
+    double angle_step;
+    camera();
+    camera(vector3, vector3);
+    vector3 get_position();
+    vector3 get_target();
+    vector3 get_direction();
+    vector3 get_right();
+    vector3 get_up();
+    void rotate_left();
+    void rotate_right();
+};
+
+class transformation_matrices
+{
+    matrix proj_orto(double, double, double, double, double, double);
+    matrix x_rotation(double);
+    matrix y_rotation(double);
+    matrix z_rotation(double);
+    matrix viewport(double, double, double, double, double);
+    matrix scale(double, double, double);
+    matrix look_at(camera camera);
 };

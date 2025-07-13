@@ -40,7 +40,7 @@ void load_scene(string file_name = "scenes/8.obj")
             {
                 pair<int, int> ids;
                 string s;
-                for(int i = 0; i < 3; i++)
+                for(int i = 0; i < size(f.v); i++)
                 {
                     ss >> s;
                     ids = parse(s);

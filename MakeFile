@@ -1,2 +1,4 @@
+SOURCES = $(shell dir /b/s *.cpp)
+
 all:
-	g++ headers\globals\globals.cpp headers\funcs\load_scene.cpp main.cpp headers\structures\matrix.cpp headers\structures\object.cpp headers\structures\vector3d.cpp headers\structures\vertex.cpp -o main.exe -IC:\SDL3-3.2.4\x86_64-w64-mingw32\include -LC:\SDL3-3.2.4\x86_64-w64-mingw32\lib -lSDL3
+	g++ $(SOURCES) -o main.exe -IC:\SDL3-3.2.4\x86_64-w64-mingw32\include -LC:\SDL3-3.2.4\x86_64-w64-mingw32\lib -lSDL3
