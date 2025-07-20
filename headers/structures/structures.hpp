@@ -4,6 +4,30 @@
 
 using namespace std;
 
+struct Point
+{
+    int x, y;
+    double z;
+    Uint32 color;
+};
+
+struct Line
+{
+    Point a, b;
+    Uint32 color;
+};
+
+struct Rect
+{
+    int x_min, y_min, x_max, y_max;
+};
+
+struct Triangle
+{
+    Point a, b, c;
+};
+
+
 class vector3
 {
 public:
@@ -12,7 +36,8 @@ public:
     vector3(double, double, double);
     vector3 operator+(vector3);
     vector3 operator-(vector3);
-    vector3 operator*(vector3);
+    vector3 operator^(vector3);
+    double operator*(vector3);
 };
 
 class vector3d

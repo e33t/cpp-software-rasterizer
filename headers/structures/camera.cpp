@@ -8,8 +8,8 @@ camera::camera(vector3 position, vector3 target)
     angle_step = 0.1;
 
     vector3 direction = target - position;
-    vector3 right = up_dir * direction;
-    vector3 up = direction * right;
+    vector3 right = up_dir ^ direction;
+    vector3 up = direction ^ right;
 }
 
 camera::camera()

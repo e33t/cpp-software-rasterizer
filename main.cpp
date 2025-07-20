@@ -26,11 +26,7 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
         return SDL_APP_FAILURE;
     }
     
-    load_scene("scenes/test.obj");
-    for (object obj : objects_pool)
-    {
-        obj.show();
-    }
+    load_scene("scenes/8.obj");
 
     return SDL_APP_CONTINUE;  
 }
