@@ -3,8 +3,8 @@
 matrix transformation_matrices::proj_orto(double left, double right, double bottom, double top, double near, double far)
 {
     matrix m(4,4);
-    m[1][1] = 2 / (top - bottom);
     m[0][0] = 2 / (right - left);
+    m[1][1] = 2 / (top - bottom);
     m[2][2] = -2 / (far - near);
     m[3][3] = 1;
     m[0][3] = -(right + left) / (right - left);
@@ -33,8 +33,8 @@ matrix transformation_matrices::y_rotation(double angle)
     double sin_val = sin(angle);
     matrix m(4,4);
     m[0][0] = cos_val;
-    m[0][2] = sin_val;
-    m[2][0] = -sin_val;
+    m[0][2] = -sin_val;
+    m[2][0] = sin_val;
     m[2][2] = cos_val;
     m[1][1] = 1;
     m[3][3] = 1;
@@ -59,7 +59,7 @@ matrix transformation_matrices::viewport(double x, double y, double width, doubl
 {
     matrix m(4,4);
     m[0][0] = width / 2;
-    m[1][1] = -height / 2;
+    m[1][1] = height / -2;
     m[2][2] = depth / 2;
     m[3][3] = 1;
     m[0][3] = x + width / 2;

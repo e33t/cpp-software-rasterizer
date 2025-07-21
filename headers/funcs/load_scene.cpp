@@ -12,11 +12,12 @@ pair<int, int> parse(string positions)
 
 void load_scene(string file_name = "scenes/8.obj")
 {
+    int color_count = 0;
     string line, mark;
     ifstream in(file_name);
     vector<vector3d> points, normals;
-    vector3d p;
     flat f;
+    double x, y, z;
 
     if(in.is_open())
     {
@@ -25,16 +26,26 @@ void load_scene(string file_name = "scenes/8.obj")
             stringstream ss(line);
             ss >> mark;
             
-            if(mark == "o") objects_pool.push_back(object(COLOR_GREY));
+            if(mark == "o") 
+            {
+                objects_pool.push_back(object(colors_pool[color_count % size(colors_pool)]));
+                color_count++;
+            }
             else if(mark == "v")
             {
-                ss >> p.x >> p.y >> p.z;
-                points.push_back(p);
+                ss >> x >> y >> z;
+                view_sp.max_x = max(x, view_sp.max_x);
+                view_sp.max_y = max(y, view_sp.max_y);
+                view_sp.max_z = max(z, view_sp.max_z);
+                view_sp.min_x = min(x, view_sp.min_x);
+                view_sp.min_y = min(y, view_sp.min_y);
+                view_sp.min_z = min(z, view_sp.min_z);
+                points.push_back(vector3d(x, y, z));
             }
             else if(mark == "vn")
             {
-                ss >> p.x >> p.y >> p.z;
-                normals.push_back(p);
+                ss >> x >> y >> z;
+                normals.push_back(vector3d(x, y, z));
             }
             else if(mark == "f")
             {

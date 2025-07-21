@@ -2,7 +2,10 @@
 
 vector3d::vector3d()
 {
-    (*this) = vector3d(0,0,0);
+    this->x = 0;
+    this->y = 0;
+    this->z = 0;
+    this->w = 1;
 }
 
 vector3d::vector3d(double x, double y, double z)

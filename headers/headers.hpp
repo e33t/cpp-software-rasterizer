@@ -7,6 +7,7 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
+#include <float.h>
 
 #include "structures/structures.hpp"
 #include "funcs/funcs.hpp"

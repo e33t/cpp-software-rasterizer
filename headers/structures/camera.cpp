@@ -4,12 +4,14 @@ camera::camera(vector3 position, vector3 target)
 {
     this->position = position;
     this->target = target;
-    angle = 0;
+    angle_x = 0;
+    angle_y = 0;
+    angle_z = 0;
     angle_step = 0.1;
 
-    vector3 direction = target - position;
-    vector3 right = up_dir ^ direction;
-    vector3 up = direction ^ right;
+    this->direction = target - position;
+    this->right = vector3(0, 1, 0) ^ this->direction;
+    this->up = this->direction ^ this->right;
 }
 
 camera::camera()
@@ -23,5 +25,11 @@ vector3 camera::get_direction() {return direction;}
 vector3 camera::get_right() {return right;}
 vector3 camera::get_up() {return up;}
 
-void camera::rotate_left() {angle -= angle_step;}
-void camera::rotate_right() {angle += angle_step;}
+void camera::rotate_x_up() {angle_x -= angle_step;}
+void camera::rotate_x_down() {angle_x += angle_step;}
+
+void camera::rotate_y_left() {angle_y -= angle_step;}
+void camera::rotate_y_right() {angle_y += angle_step;}
+
+void camera::rotate_z_clock() {angle_z -= angle_step;}
+void camera::rotate_z_counterclock() {angle_z += angle_step;}

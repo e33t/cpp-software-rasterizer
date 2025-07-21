@@ -13,5 +13,5 @@ vertex::vertex(vector3d points, vector3d normals)
 }
 vertex vertex::transform(matrix m)
 {
-    return vertex(m * points, normals);
+    return vertex(m * this->points, normals);
 }

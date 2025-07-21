@@ -5,7 +5,7 @@ matrix::matrix()
     (*this) = matrix(0,0);
 }
 
-matrix::matrix(int width, int height)
+matrix::matrix(int height, int width)
 {
     this->width = width;
     this->height = height;
@@ -15,18 +15,18 @@ matrix::matrix(int width, int height)
 matrix::matrix(vector<vector<double>> m)
 {
     matrix_body = m;
-    width = matrix_body[0].size();
     height = matrix_body.size();
+    width = matrix_body[0].size();
 }
 
 matrix::matrix(vector3d v3d)
 {
     matrix_body = {{v3d.x},{v3d.y},{v3d.z},{v3d.w}};
-    width = matrix_body[0].size();
     height = matrix_body.size();
+    width = matrix_body[0].size();
 }
 
-vector<double> matrix::operator [](unsigned int index)
+vector<double>& matrix::operator[](unsigned int index)
 {
     return matrix_body[index];
 }
@@ -39,11 +39,16 @@ vector3d matrix::to_vector3d()
 matrix matrix::operator*(matrix m)
 {
     matrix result = matrix(this->height, m.width);
-
     for (int i = 0; i < this->height; i++)
+    {
         for (int j = 0; j < m.width; j++)
+        {
             for (int k = 0; k < this->width; k++)
-                result[i][j] += (*this)[i][k] * m[k][j];
+            {
+                result[i][j] += matrix_body[i][k] * m[k][j];
+            }
+        }
+    }
 
     return result;
 }

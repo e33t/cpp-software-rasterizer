@@ -3,11 +3,6 @@
 #include "headers/headers.hpp"
 #include <SDL3/SDL_main.h>
 
-static void draw_pixel(int x, int y, Uint32 color, Uint32* pixels)
-{
-    pixels[y * WINDOW_WIDTH + x] = color;
-}
-
 SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
 {
     if (!SDL_Init(SDL_INIT_VIDEO)) {
@@ -15,7 +10,7 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
         return SDL_APP_FAILURE;
     }
 
-    if (!SDL_CreateWindowAndRenderer("lab1", WINDOW_WIDTH, WINDOW_HEIGHT, 0, &window, &renderer)) {
+    if (!SDL_CreateWindowAndRenderer("3D", WINDOW_WIDTH, WINDOW_HEIGHT, 0, &window, &renderer)) {
         SDL_Log("Couldn't create window/renderer: %s", SDL_GetError());
         return SDL_APP_FAILURE;
     }
@@ -25,8 +20,8 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
         SDL_Log("Couldn't create streaming texture: %s", SDL_GetError());
         return SDL_APP_FAILURE;
     }
-    
     load_scene("scenes/8.obj");
+    form_transformation_matrix();
 
     return SDL_APP_CONTINUE;  
 }
@@ -46,16 +41,16 @@ SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event)
 SDL_AppResult SDL_AppIterate(void *appstate)
 {
 
-    // Uint32* pixels = nullptr;
-    // int pitch = 0;
-    // if (SDL_LockTexture(texture, NULL, (void**)&pixels, &pitch)) 
-    // {	
-        
-    //     SDL_UnlockTexture(texture);
-    // }
-    // SDL_RenderTexture(renderer, texture, NULL, NULL);
-    // SDL_RenderPresent(renderer); 
-
+    Uint32* pixels = nullptr;
+    int pitch = 0;
+    if (SDL_LockTexture(texture, NULL, (void**)&pixels, &pitch)) 
+    {	
+        draw_frame(pixels);
+        SDL_UnlockTexture(texture);
+    }
+    SDL_RenderTexture(renderer, texture, NULL, NULL);
+    SDL_RenderPresent(renderer);
+    // return SDL_APP_SUCCESS;
     return SDL_APP_CONTINUE;
 }
 

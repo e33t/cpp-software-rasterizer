@@ -60,9 +60,9 @@ public:
     matrix(vector<vector<double>>);
     matrix(vector3d);
     vector3d to_vector3d();
-    vector<double> operator [](unsigned int);
-    matrix operator *(matrix);
-    vector3d operator *(vector3d);
+    vector<double>& operator[](unsigned int);
+    matrix operator*(matrix);
+    vector3d operator*(vector3d);
 };
 
 class vertex
@@ -91,14 +91,13 @@ public:
 
 class camera
 {
-    vector3 up_dir = vector3(0, 1, 0);
     vector3 position;
     vector3 target;
     vector3 direction;
     vector3 right;
     vector3 up;
 public:
-    double angle;
+    double angle_x, angle_y, angle_z;
     double angle_step;
     camera();
     camera(vector3, vector3);
@@ -107,12 +106,17 @@ public:
     vector3 get_direction();
     vector3 get_right();
     vector3 get_up();
-    void rotate_left();
-    void rotate_right();
+    void rotate_x_up();
+    void rotate_x_down();
+    void rotate_y_left();
+    void rotate_y_right();
+    void rotate_z_clock();
+    void rotate_z_counterclock();
 };
 
 class transformation_matrices
 {
+public:
     matrix proj_orto(double, double, double, double, double, double);
     matrix x_rotation(double);
     matrix y_rotation(double);
@@ -120,4 +124,9 @@ class transformation_matrices
     matrix viewport(double, double, double, double, double);
     matrix scale(double, double, double);
     matrix look_at(camera camera);
+};
+
+struct view_space
+{
+    double min_x, min_y, min_z, max_x, max_y, max_z;
 };
