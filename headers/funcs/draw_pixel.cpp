@@ -1,6 +1,6 @@
 #include "../headers.hpp"
 
-void draw_pixel(int x, int y, Uint32 color, Uint32* pixels)
+void draw_pixel(Point p, Uint32* pixels)
 {
-    pixels[y * WINDOW_WIDTH + x] = color;
+    pixels[p.y * WINDOW_WIDTH + p.x] = p.color;
 }

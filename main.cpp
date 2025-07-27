@@ -33,6 +33,35 @@ SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event)
     case SDL_EVENT_QUIT:
         return SDL_APP_SUCCESS;
         break;
+    case SDL_EVENT_KEY_DOWN:
+        SDL_Keycode sym = event->key.key;
+        switch (sym)
+        {
+        case SDLK_W:
+            cam.rotate_x_up();
+            break;
+        case SDLK_A:
+            cam.rotate_y_left();
+            break;
+        case SDLK_S:
+            cam.rotate_x_down();
+            break;
+        case SDLK_D:
+            cam.rotate_y_right();
+            break;
+        case SDLK_Q:
+            cam.rotate_z_clock();
+            break;
+        case SDLK_E:
+            cam.rotate_z_counterclock();
+            break;
+        case SDLK_R:
+            cam.angle_x = 0;
+            cam.angle_y = 0;
+            cam.angle_z = 0;
+            break;
+        }
+        break;
     }
     return SDL_APP_CONTINUE;
 }

@@ -9,7 +9,7 @@ using namespace std;
 #define GET_BLUE(color) ((color & 0x0000FF00) >> 8)
 #define COMPOSE_COLOR(r, g, b) ((r << 24) | (g << 16) | (b << 8) | 0xFF)
 
-void draw_pixel(int, int, Uint32, Uint32*);
+void draw_pixel(Point, Uint32*);
 
 void load_scene(string);
 

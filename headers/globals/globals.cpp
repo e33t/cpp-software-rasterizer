@@ -10,3 +10,4 @@ matrix main_matrix;
 view_space view_sp = {DBL_MAX, DBL_MAX, DBL_MAX, -DBL_MAX, -DBL_MAX, -DBL_MAX};
 transformation_matrices transforms;
 vector3 light = {0.2, 0.7, 1};
+double z_buffer[WINDOW_WIDTH][WINDOW_HEIGHT];

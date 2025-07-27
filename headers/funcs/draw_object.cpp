@@ -12,9 +12,7 @@ void draw_object(object obj, Uint32 *pixels)
             p[i].y = (int)v.y;
             p[i].z = v.z;
             p[i].color = light_calculation(f.v->normals.to_vector3(), obj.color);
-            // cout << p[i].x << " " << p[i].y << " " << p[i].z << endl;
         }
-        // cout << "---------------" << endl;
         fill_triangle({p[0], p[1], p[2]}, pixels);
     }
 }
