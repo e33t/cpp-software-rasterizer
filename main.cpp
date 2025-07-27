@@ -33,6 +33,10 @@ SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event)
     case SDL_EVENT_QUIT:
         return SDL_APP_SUCCESS;
         break;
+    case SDL_EVENT_MOUSE_WHEEL:
+        if (event->wheel.y > 0) cam.scale_up();
+        else cam.scale_down();
+        break;
     case SDL_EVENT_KEY_DOWN:
         SDL_Keycode sym = event->key.key;
         switch (sym)
@@ -59,6 +63,7 @@ SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event)
             cam.angle_x = 0;
             cam.angle_y = 0;
             cam.angle_z = 0;
+            cam.scale = 0.4;
             break;
         }
         break;

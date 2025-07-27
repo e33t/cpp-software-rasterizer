@@ -97,8 +97,8 @@ class camera
     vector3 right;
     vector3 up;
 public:
-    double angle_x, angle_y, angle_z;
-    double angle_step;
+    double angle_x, angle_y, angle_z, scale;
+    double angle_step, scale_step;
     camera();
     camera(vector3, vector3);
     vector3 get_position();
@@ -112,6 +112,8 @@ public:
     void rotate_y_right();
     void rotate_z_clock();
     void rotate_z_counterclock();
+    void scale_up();
+    void scale_down();
 };
 
 class transformation_matrices
