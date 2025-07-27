@@ -60,7 +60,7 @@ void fill_triangle(Triangle tr, Uint32* pixels) //a -> tr.a, b -> tr.b, c -> tr.
             Point p = {j, i, 0, color};
             double tz = (a.x != b.x) ? (double)(j - a.x) / (b.x - a.x) : 1;
             p.z = interpolate_point(a.z, b.z, tz);
-            if(((p.x > 0) && (p.x < WINDOW_WIDTH) && (p.y > 0) && (p.y < WINDOW_HEIGHT)) && (p.z > z_buffer[p.x][p.y]))
+            if(((p.x >= 0) && (p.x < WINDOW_WIDTH) && (p.y >= 0) && (p.y < WINDOW_HEIGHT)) && (p.z > z_buffer[p.x][p.y]))
             {
                 z_buffer[p.x][p.y] = p.z;
                 draw_pixel(p, pixels);
