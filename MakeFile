@@ -1,4 +1,10 @@
+# Сборка под Windows + MinGW + SDL3
+# Перед сборкой укажите свой путь к SDL3 в INCLUDE_DIR и LIB_DIR.
+
+INCLUDE_DIR = C:\SDL3-3.2.4\x86_64-w64-mingw32\include
+LIB_DIR     = C:\SDL3-3.2.4\x86_64-w64-mingw32\lib
+
 SOURCES = $(shell dir /b/s *.cpp)
 
 all:
-	g++ $(SOURCES) -o main.exe -IC:\SDL3-3.2.4\x86_64-w64-mingw32\include -LC:\SDL3-3.2.4\x86_64-w64-mingw32\lib -lSDL3
+	g++ $(SOURCES) -o main.exe -I$(INCLUDE_DIR) -L$(LIB_DIR) -lSDL3

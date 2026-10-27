@@ -22,7 +22,7 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
     }
     load_scene("scenes/8.obj");
     form_transformation_matrix();
-
+    SDL_SetHintWithPriority(SDL_HINT_WINDOWS_RAW_KEYBOARD, "1", SDL_HINT_OVERRIDE);
     return SDL_APP_CONTINUE;  
 }
 
@@ -39,32 +39,18 @@ SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event)
         break;
     case SDL_EVENT_KEY_DOWN:
         SDL_Keycode sym = event->key.key;
-        switch (sym)
+        if(sym == SDLK_W) cam.rotate_x_up();
+        if(sym == SDLK_A) cam.rotate_y_left();
+        if(sym == SDLK_S) cam.rotate_x_down();
+        if(sym == SDLK_D) cam.rotate_y_right();
+        if(sym == SDLK_Q) cam.rotate_z_clock();
+        if(sym == SDLK_E) cam.rotate_z_counterclock();   
+        if(sym == SDLK_R)
         {
-        case SDLK_W:
-            cam.rotate_x_up();
-            break;
-        case SDLK_A:
-            cam.rotate_y_left();
-            break;
-        case SDLK_S:
-            cam.rotate_x_down();
-            break;
-        case SDLK_D:
-            cam.rotate_y_right();
-            break;
-        case SDLK_Q:
-            cam.rotate_z_clock();
-            break;
-        case SDLK_E:
-            cam.rotate_z_counterclock();
-            break;
-        case SDLK_R:
             cam.angle_x = 0;
             cam.angle_y = 0;
             cam.angle_z = 0;
             cam.scale = 0.4;
-            break;
         }
         break;
     }
